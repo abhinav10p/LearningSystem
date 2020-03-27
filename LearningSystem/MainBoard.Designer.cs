@@ -127,9 +127,9 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(331, 28);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Load";
+            this.button1.Text = "Load Users";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.LoadData_Click);
+            this.button1.Click += new System.EventHandler(this.GetStudents_Click);
             // 
             // listBox1
             // 
@@ -306,9 +306,9 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(331, 28);
             this.button2.TabIndex = 0;
-            this.button2.Text = "Load";
+            this.button2.Text = "Load Courses";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Load_Courses);
+            this.button2.Click += new System.EventHandler(this.GetCourses_Click);
             // 
             // dataGridView1
             // 

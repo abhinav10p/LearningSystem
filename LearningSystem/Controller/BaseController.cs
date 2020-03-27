@@ -9,7 +9,8 @@ namespace LearningSystem.Controller
 {
     public class BaseController
     {
-
+        private static int userid;
+        public static int UserId { get { return userid; } set { userid = value; } }
         public BaseController()
         {
 

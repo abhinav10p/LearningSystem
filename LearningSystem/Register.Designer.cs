@@ -84,7 +84,7 @@
             this.tTadioButton.Location = new System.Drawing.Point(332, 217);
             this.tTadioButton.Name = "tTadioButton";
             this.tTadioButton.Size = new System.Drawing.Size(70, 19);
-            this.tTadioButton.TabIndex = 15;
+            this.tTadioButton.TabIndex = 5;
             this.tTadioButton.TabStop = true;
             this.tTadioButton.Text = "Teacher";
             this.tTadioButton.UseVisualStyleBackColor = false;
@@ -97,7 +97,7 @@
             this.stRadioButton.Location = new System.Drawing.Point(259, 217);
             this.stRadioButton.Name = "stRadioButton";
             this.stRadioButton.Size = new System.Drawing.Size(67, 19);
-            this.stRadioButton.TabIndex = 14;
+            this.stRadioButton.TabIndex = 4;
             this.stRadioButton.TabStop = true;
             this.stRadioButton.Text = "Student";
             this.stRadioButton.UseVisualStyleBackColor = false;
@@ -107,9 +107,9 @@
             this.contactBox.Location = new System.Drawing.Point(259, 191);
             this.contactBox.Name = "contactBox";
             this.contactBox.Size = new System.Drawing.Size(201, 20);
-            this.contactBox.TabIndex = 13;
+            this.contactBox.TabIndex = 3;
             this.contactBox.Tag = "c";
-            this.contactBox.Validating += new System.ComponentModel.CancelEventHandler(this.Box_Validating);
+            this.contactBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.contactBox_KeyDown);
             // 
             // label6
             // 
@@ -119,7 +119,7 @@
             this.label6.Location = new System.Drawing.Point(258, 173);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 15);
-            this.label6.TabIndex = 12;
+            this.label6.TabIndex = 40;
             this.label6.Text = "Contact No";
             // 
             // button1
@@ -137,7 +137,7 @@
             this.sumitButton.Location = new System.Drawing.Point(259, 361);
             this.sumitButton.Name = "sumitButton";
             this.sumitButton.Size = new System.Drawing.Size(88, 23);
-            this.sumitButton.TabIndex = 10;
+            this.sumitButton.TabIndex = 8;
             this.sumitButton.Text = "Submit";
             this.sumitButton.UseVisualStyleBackColor = true;
             this.sumitButton.Click += new System.EventHandler(this.sumitButton_Click);
@@ -150,7 +150,7 @@
             this.label5.Location = new System.Drawing.Point(259, 306);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(102, 15);
-            this.label5.TabIndex = 9;
+            this.label5.TabIndex = 40;
             this.label5.Text = "Retype Password";
             // 
             // label4
@@ -161,7 +161,7 @@
             this.label4.Location = new System.Drawing.Point(259, 256);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 15);
-            this.label4.TabIndex = 8;
+            this.label4.TabIndex = 40;
             this.label4.Text = "Password";
             // 
             // label3
@@ -172,7 +172,7 @@
             this.label3.Location = new System.Drawing.Point(259, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 15);
-            this.label3.TabIndex = 7;
+            this.label3.TabIndex = 40;
             this.label3.Text = "Last Name";
             // 
             // label2
@@ -183,7 +183,7 @@
             this.label2.Location = new System.Drawing.Point(259, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 15);
-            this.label2.TabIndex = 6;
+            this.label2.TabIndex = 40;
             this.label2.Text = "First Name";
             // 
             // label1
@@ -194,7 +194,7 @@
             this.label1.Location = new System.Drawing.Point(259, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 15);
-            this.label1.TabIndex = 5;
+            this.label1.TabIndex = 40;
             this.label1.Text = "Email";
             // 
             // retypePassword
@@ -203,9 +203,9 @@
             this.retypePassword.Name = "retypePassword";
             this.retypePassword.PasswordChar = '*';
             this.retypePassword.Size = new System.Drawing.Size(201, 20);
-            this.retypePassword.TabIndex = 4;
+            this.retypePassword.TabIndex = 7;
             this.retypePassword.Tag = "p";
-            this.retypePassword.Validating += new System.ComponentModel.CancelEventHandler(this.emailBox_Validating);
+            this.retypePassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.contactBox_KeyDown);
             // 
             // paswordBox
             // 
@@ -213,9 +213,9 @@
             this.paswordBox.Name = "paswordBox";
             this.paswordBox.PasswordChar = '*';
             this.paswordBox.Size = new System.Drawing.Size(201, 20);
-            this.paswordBox.TabIndex = 3;
+            this.paswordBox.TabIndex = 6;
             this.paswordBox.Tag = "p";
-            this.paswordBox.Validating += new System.ComponentModel.CancelEventHandler(this.emailBox_Validating);
+            this.paswordBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.contactBox_KeyDown);
             // 
             // lastNameBox
             // 
@@ -223,7 +223,7 @@
             this.lastNameBox.Name = "lastNameBox";
             this.lastNameBox.Size = new System.Drawing.Size(201, 20);
             this.lastNameBox.TabIndex = 2;
-            this.lastNameBox.Validating += new System.ComponentModel.CancelEventHandler(this.Box_Validating);
+            this.lastNameBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.contactBox_KeyDown);
             // 
             // firstNameBox
             // 
@@ -232,7 +232,7 @@
             this.firstNameBox.Size = new System.Drawing.Size(201, 20);
             this.firstNameBox.TabIndex = 1;
             this.firstNameBox.Tag = "x";
-            this.firstNameBox.Validating += new System.ComponentModel.CancelEventHandler(this.Box_Validating);
+            this.firstNameBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.contactBox_KeyDown);
             // 
             // emailBox
             // 
@@ -241,7 +241,7 @@
             this.emailBox.Size = new System.Drawing.Size(201, 20);
             this.emailBox.TabIndex = 0;
             this.emailBox.Tag = "x";
-            this.emailBox.Validating += new System.ComponentModel.CancelEventHandler(this.Box_Validating);
+            this.emailBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.contactBox_KeyDown);
             // 
             // linkLabel1
             // 
@@ -273,6 +273,7 @@
             this.Name = "Register";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Register";
+            this.VisibleChanged += new System.EventHandler(this.Register_VisibleChanged);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

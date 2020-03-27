@@ -90,7 +90,7 @@
             this.radioButton2.Location = new System.Drawing.Point(307, 214);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(70, 19);
-            this.radioButton2.TabIndex = 9;
+            this.radioButton2.TabIndex = 3;
             this.radioButton2.TabStop = true;
             this.radioButton2.Tag = "2";
             this.radioButton2.Text = "Teacher";
@@ -105,7 +105,7 @@
             this.radioButton1.Location = new System.Drawing.Point(234, 214);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(67, 19);
-            this.radioButton1.TabIndex = 8;
+            this.radioButton1.TabIndex = 2;
             this.radioButton1.TabStop = true;
             this.radioButton1.Tag = "1";
             this.radioButton1.Text = "Student";
@@ -129,10 +129,11 @@
             this.registerLink.ActiveLinkColor = System.Drawing.Color.Cyan;
             this.registerLink.AutoSize = true;
             this.registerLink.BackColor = System.Drawing.Color.Transparent;
+            this.registerLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.164948F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.registerLink.LinkColor = System.Drawing.Color.DeepSkyBlue;
-            this.registerLink.Location = new System.Drawing.Point(337, 269);
+            this.registerLink.Location = new System.Drawing.Point(332, 269);
             this.registerLink.Name = "registerLink";
-            this.registerLink.Size = new System.Drawing.Size(117, 15);
+            this.registerLink.Size = new System.Drawing.Size(135, 15);
             this.registerLink.TabIndex = 6;
             this.registerLink.TabStop = true;
             this.registerLink.Text = "Create New Account";
@@ -146,7 +147,7 @@
             this.label1.Location = new System.Drawing.Point(231, 129);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 15);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 10;
             this.label1.Text = "User Name";
             // 
             // cancelButton
@@ -184,7 +185,7 @@
             this.label2.Location = new System.Drawing.Point(231, 170);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 15);
-            this.label2.TabIndex = 2;
+            this.label2.TabIndex = 10;
             this.label2.Text = "Password";
             // 
             // passBox
@@ -193,7 +194,8 @@
             this.passBox.Name = "passBox";
             this.passBox.PasswordChar = '*';
             this.passBox.Size = new System.Drawing.Size(273, 20);
-            this.passBox.TabIndex = 3;
+            this.passBox.TabIndex = 1;
+            this.passBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passBox_KeyDown);
             // 
             // errorProvider1
             // 
@@ -236,6 +238,7 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.VisibleChanged += new System.EventHandler(this.Login_VisibleChanged);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

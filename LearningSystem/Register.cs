@@ -16,6 +16,7 @@ namespace LearningSystem
     public partial class Register : Form
     {
         private List<TextBoxBase> txtBoxes;
+        private bool checkValid;
         public Register()
         {
             InitializeComponent();
@@ -39,15 +40,35 @@ namespace LearningSystem
             BaseController.NavTo("Login");
         }
 
-        private void passCheck()
-        {
-
-        }
         private void sumitButton_Click(object sender, EventArgs e)
         {
+            this.Submit_Data();
+        }
+        private void Submit_Data()
+        {
+            checkValid = true;
 
-            var checkValid = true;
+            this.CheckValidity(checkValid);
 
+            if (checkValid)
+            {
+                var ins = BaseController.GetStudentProfileByEmail(txtBoxes[1].Text);
+
+
+                if (ins == null)
+                {
+                    BaseController.InsertStudent(txtBoxes[0].Text, txtBoxes[5].Text,
+                        txtBoxes[4].Text, txtBoxes[1].Text, txtBoxes[2].Text);
+                    BaseController.NavTo("Login");
+                }
+                else
+                {
+                    MessageBox.Show("User already exists");
+                }
+            }
+        }
+        private void CheckValidity(bool checkValid)
+        {
             for (int i = 0; i < txtBoxes.Count; i++)
             {
                 if (string.IsNullOrEmpty(txtBoxes[i].Text) && i < 4)
@@ -67,35 +88,22 @@ namespace LearningSystem
                     errorProvider1.SetError(txtBoxes[i], null);
                 }
             }
+        }
 
-
-            if (checkValid)
+        private void Register_VisibleChanged(object sender, EventArgs e)
+        {
+            foreach (var item in txtBoxes)
             {
-                var ins = BaseController.GetStudentProfileByEmail(txtBoxes[1].Text);
-
-
-                if (ins == null)
-                {
-                    BaseController.InsertStudent(txtBoxes[0].Text, txtBoxes[5].Text,
-                        txtBoxes[4].Text, txtBoxes[1].Text, txtBoxes[2].Text);
-                    BaseController.NavTo("Login");
-                }
-                else
-                {
-                    MessageBox.Show("User already exists");
-                }
+                item.Text = "";
             }
-
         }
 
-        private void emailBox_Validating(object sender, CancelEventArgs e)
+        private void contactBox_KeyDown(object sender, KeyEventArgs e)
         {
-
-        }
-
-        private void Box_Validating(object sender, CancelEventArgs e)
-        {
-
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.Submit_Data();
+            }
         }
     }
 }

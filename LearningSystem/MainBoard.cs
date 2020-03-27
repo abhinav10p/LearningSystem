@@ -19,9 +19,8 @@ namespace LearningSystem
         {
             InitializeComponent();
             Mock = DBData.Instance;
-            LoadItems();
+            LoadCustomList();
         }
-
 
         private void Menu_Click(object sender, EventArgs e)
         {
@@ -47,7 +46,7 @@ namespace LearningSystem
             }
         }
 
-        private void Load_Courses(object sender, EventArgs e)
+        private void GetCourses_Click(object sender, EventArgs e)
         {
             this.courses = BaseController.GetCourses();
             if (this.courses.Count != 0)
@@ -56,36 +55,35 @@ namespace LearningSystem
                 courseListBox.DisplayMember = "Name";
                 courseListBox.ValueMember = "Id";
                 courseListBox.SetSelected(0, true);
-                this.ShowSelectedCourseData();
+                this.GetSelectedTopics();
             }
         }
 
-        private void LoadData_Click(object sender, EventArgs e)
+        private void GetStudents_Click(object sender, EventArgs e)
         {
             this.students = BaseController.GetStudents();
+
             if (this.students.Count != 0)
             {
                 listBox1.DataSource = this.students;
                 listBox1.DisplayMember = "FirstName";
                 listBox1.ValueMember = "Id";
                 listBox1.SetSelected(0, true);
-                this.ShowSelectData();
+                this.GetSelectedStudentProfile();
             }
-
         }
-
 
         private void UserListItem_Click(object sender, EventArgs e)
         {
-            this.ShowSelectData();
+            this.GetSelectedStudentProfile();
         }
 
         private void CourseListItem_Click(object sender, EventArgs e)
         {
-            this.ShowSelectedCourseData();
+            this.GetSelectedTopics();
         }
 
-        private void ShowSelectedCourseData()
+        private void GetSelectedTopics()
         {
             var sId = courseListBox.SelectedValue.ToString();
 
@@ -104,7 +102,7 @@ namespace LearningSystem
             }
         }
 
-        private void ShowSelectData()
+        private void GetSelectedStudentProfile()
         {
             var sId = listBox1.SelectedValue;
 
@@ -118,8 +116,7 @@ namespace LearningSystem
             }
         }
 
-
-        private void LoadItems()
+        private void LoadCustomList()
         {
             CustomListItem[] customListItem = new CustomListItem[20];
 
@@ -136,8 +133,6 @@ namespace LearningSystem
         {
             MessageBox.Show("Hello");
         }
-
-
     }
 }
 
