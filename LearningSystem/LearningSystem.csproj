@@ -197,6 +197,7 @@
     <Compile Include="Mock.Designer.cs">
       <DependentUpon>Mock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\API\FullProgress.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\DBConfig\CourseCategoryConfig.cs" />
     <Compile Include="Model\DBConfig\CourseConfig.cs" />

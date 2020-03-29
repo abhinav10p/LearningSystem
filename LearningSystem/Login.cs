@@ -91,23 +91,19 @@ namespace LearningSystem
                 }
             }
         }
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
 
-        private void registerLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            BaseController.NavTo("Register");
-        }
-
-        private void Login_VisibleChanged(object sender, EventArgs e)
+        private void ResetAll_Click(object sender, EventArgs e)
         {
             foreach (var item in txtBoxes)
             {
                 item.Text = "";
             }
             statusLabel.Text = "";
+        }
+
+        private void registerLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            BaseController.NavTo("Register");
         }
 
         private void passBox_KeyDown(object sender, KeyEventArgs e)
@@ -117,6 +113,16 @@ namespace LearningSystem
                 this.Login_Action();
             }
             
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            BaseController.NavTo("MainBoard");
         }
     }
 }

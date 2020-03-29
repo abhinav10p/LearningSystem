@@ -10,21 +10,10 @@ namespace LearningSystem.Model
     {
         public ELContext context { get; }
 
-        #region
-        /* public Login login { get; }
-         public Register register { get; }
-         public MainBoard mainBoard { get; }*/
-        #endregion
-
 
         public DBData()
         {
             context = new ELContext();
-            #region
-            /*  login = new Login();
-              register = new Register();
-              mainBoard = new MainBoard();*/
-            #endregion
         }
 
         public void CreateStudentMock()
@@ -179,22 +168,5 @@ namespace LearningSystem.Model
                 return instance;
             }
         }
-
-        #region
-        /* public Form GetLogin()
-         {
-             return login;
-         }
-
-         public Form GetRegister()
-         {
-             return register;
-         }
-
-         public Form GetMainBoard()
-         {
-             return mainBoard;
-         }*/
-        #endregion
     }
 }

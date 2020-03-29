@@ -15,8 +15,8 @@ namespace LearningSystem.UXCustom
         public CustomListItem()
         {
             InitializeComponent();
-        }
 
+        }
         public string DisplayMember { get; internal set; }
 
         private string _title;
@@ -24,7 +24,12 @@ namespace LearningSystem.UXCustom
         public String Title
         {
             get { return _title; }
-            set { _title = value; label1.Text = value; }
+            set
+            {
+                _title = value;
+                label1.Text = value;
+                this.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            }
         }
 
         private void CustomListItem_MouseEnter(object sender, EventArgs e)
@@ -36,5 +41,6 @@ namespace LearningSystem.UXCustom
         {
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
         }
+
     }
 }

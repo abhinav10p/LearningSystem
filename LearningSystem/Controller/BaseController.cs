@@ -1,6 +1,8 @@
 ﻿using LearningSystem.Model;
+using LearningSystem.Model.API;
 using LearningSystem.Model.DB;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,7 +12,9 @@ namespace LearningSystem.Controller
     public class BaseController
     {
         private static int userid;
+
         public static int UserId { get { return userid; } set { userid = value; } }
+
         public BaseController()
         {
 
@@ -66,7 +70,6 @@ namespace LearningSystem.Controller
             DBData db = DBData.Instance;
             db.CreateCategory();
         }
-
 
         public static void NavTo(string windowName)
         {
@@ -129,25 +132,114 @@ namespace LearningSystem.Controller
             db.context.SaveChanges();
         }
 
-        #region
-        /* public static Form GetLogin()
-         {
-             DBData db = DBData.Instance;
-             return db.GetLogin();
-         }
+        private static int GetCompletionPercent(int cId, int tId)
+        {
+            var topics = GetTopics(cId.ToString());
+            var count = topics.Count();
+            var index = topics.FindIndex(p => p.Id == tId) + 1;
+            if (index == 1)
+            {
+                return 0;
+            }
+            else
+            {
+                var mod = (int)Math.Round((double)(100 * index + 1) / count); ;
+                return mod;
+            }
 
-         public Form GetRegister()
-         {
-             DBData db = DBData.Instance;
-             return db.GetRegister();
-         }
+        }
 
-         public Form GetMainBoard()
-         {
-             DBData db = DBData.Instance;
-             return db.GetMainBoard();
-         }*/
-        #endregion
+        public static List<FullProgress> GetProgress(int u)
+        {
+            DBData db = DBData.Instance;
+            var st = db.context.Students;
+            var tp = db.context.Topics;
+            var cs = db.context.Courses;
+
+
+            var allProgress = db.context.Progresses.ToList();
+            var progress = allProgress;
+            if (u == 0)
+            {
+                progress = allProgress
+              .Where(p => p.StudentId == UserId).ToList();
+            }
+
+
+            var ct = from p in progress
+                     join s in st on p.StudentId equals s.Id
+                     join t in tp on p.TopicId equals t.Id
+                     join c in cs on t.CourseId equals c.Id
+                     select new FullProgress
+                     {
+                         Name = $"{s.FirstName } {s.LastName}",
+                         Course = c.Name,
+                         Topic = t.Name,
+                         Completion = $"{GetCompletionPercent(c.Id, t.Id)}%",
+                         StudentId = s.Id,
+                         CourseId = c.Id,
+                         TopicId = t.Id
+                     };
+
+            return ct.ToList();
+        }
+
+        public static bool ProgressExist(int sId, int tId)
+        {
+            DBData db = DBData.Instance;
+            var progresses = db.context.Progresses.ToList().SingleOrDefault(p => p.StudentId == sId && p.TopicId == tId);
+            return (progresses != null);
+        }
+
+        public static string InsertProgress(string courseId)
+        {
+            DBData db = DBData.Instance;
+            var sId = UserId;
+            var tId = GetTopics(courseId).First().Id;
+            String message;
+
+            if (!ProgressExist(sId, tId))
+            {
+                Progress pr = new Progress()
+                {
+                    StudentId = sId,
+                    TopicId = tId,
+                    Completion = 0
+                };
+
+                db.context.Progresses.Add(pr);
+                db.context.SaveChanges();
+                message = "New Course Enrolled";
+            }
+            else
+            {
+                message = "Cannot Enroll same course";
+            }
+
+            return message;
+        }
+
+        public static string UpdateProgress(int tId, int oldtId, int index)
+        {
+            DBData db = DBData.Instance;
+            var sId = UserId;
+            String message;
+            var result1 = db.context.Progresses;
+            var result = result1.SingleOrDefault(b => b.StudentId == sId && b.TopicId == oldtId);
+
+
+            if (result != null)
+            {
+                result.TopicId = tId;
+                db.context.SaveChanges();
+                message = $"Learning{result.TopicId}";
+            }
+            else
+            {
+                message = "Failed to start";
+            }
+            return message;
+        }
 
     }
 }

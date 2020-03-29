@@ -1,5 +1,6 @@
 ﻿using LearningSystem.Controller;
 using LearningSystem.Model;
+using LearningSystem.Model.API;
 using LearningSystem.Model.DB;
 using LearningSystem.UXCustom;
 using System;
@@ -14,12 +15,23 @@ namespace LearningSystem
         private readonly DBData Mock;
         List<Student> students = new List<Student>();
         List<Course> courses = new List<Course>();
+        List<Topic> topics = new List<Topic>();
+        List<FullProgress> progresses = new List<FullProgress>();
 
         public MainBoard()
         {
             InitializeComponent();
             Mock = DBData.Instance;
-            LoadCustomList();
+            Oninit();
+        }
+
+
+        private void Oninit()
+        {
+            BaseController.UserId = 2;
+            this.courses = BaseController.GetCourses();
+
+            GetCourses(courseList, 0);
         }
 
         private void Menu_Click(object sender, EventArgs e)
@@ -31,108 +43,166 @@ namespace LearningSystem
                 case 0:
                     Application.Exit();
                     break;
-                case 1:
-                    BaseController.CreateStudentMock();
-                    break;
-                case 2:
-                    BaseController.CreateCourseMock();
-                    break;
-                case 3:
-                    BaseController.CreateCategory();
-                    break;
                 case 4:
                     BaseController.NavTo("Login");
                     break;
             }
         }
 
-        private void GetCourses_Click(object sender, EventArgs e)
-        {
-            this.courses = BaseController.GetCourses();
-            if (this.courses.Count != 0)
-            {
-                courseListBox.DataSource = this.courses;
-                courseListBox.DisplayMember = "Name";
-                courseListBox.ValueMember = "Id";
-                courseListBox.SetSelected(0, true);
-                this.GetSelectedTopics();
-            }
-        }
 
-        private void GetStudents_Click(object sender, EventArgs e)
-        {
-            this.students = BaseController.GetStudents();
 
-            if (this.students.Count != 0)
-            {
-                listBox1.DataSource = this.students;
-                listBox1.DisplayMember = "FirstName";
-                listBox1.ValueMember = "Id";
-                listBox1.SetSelected(0, true);
-                this.GetSelectedStudentProfile();
-            }
-        }
-
-        private void UserListItem_Click(object sender, EventArgs e)
-        {
-            this.GetSelectedStudentProfile();
-        }
 
         private void CourseListItem_Click(object sender, EventArgs e)
         {
-            this.GetSelectedTopics();
+            this.GetSelectedTopics(topicList, 0, (int)courseList.SelectedValue);
         }
-
-        private void GetSelectedTopics()
+        private void GetSelectedTopics(ListBox list, int u, int index)
         {
-            var sId = courseListBox.SelectedValue.ToString();
-
-            if (sId != null)
+            var sId = index - 1;
+            if (sId != -1)
             {
-                var courseDetails = this.courses[int.Parse(sId) - 1].Topics;
-
+                var courseDetails = this.courses[sId].Topics;
+                this.topics = courseDetails.ToList();
                 if (courseDetails.Count() > 0)
                 {
-                    dataGridView1.DataSource = courseDetails.ToList();
-                    dataGridView1.Columns["CourseId"].Visible = false;
-                    dataGridView1.Columns["Course"].Visible = false;
-                    dataGridView1.Columns["Progresses"].Visible = false;
-                    dataGridView1.Columns["Id"].Visible = false;
+                    list.DataSource = this.topics;
+                    list.DisplayMember = "Name";
+                    list.ValueMember = "Id";
+                }
+                if (u == 0)
+                {
+                    authorTxt.Text = this.courses[sId].Teacher.TeacherProfile.FirstName +
+                   this.courses[sId].Teacher.TeacherProfile.LastName;
+                    detailTxt.Text = this.courses[sId].Description;
+                    hoursTxt.Text = this.courses[sId].TotalHours.ToString();
+                    lecturesTxt.Text = this.courses[sId].Lectures.ToString();
                 }
             }
         }
 
-        private void GetSelectedStudentProfile()
+        private void courseList2_Click(object sender, EventArgs e)
         {
-            var sId = listBox1.SelectedValue;
-
-            if (sId != null)
-            {
-                var studentProfiles = BaseController.GetStudentProfileById(sId.ToString());
-                textBox1.Text = this.students[listBox1.SelectedIndex].FirstName;
-                textBox2.Text = this.students[listBox1.SelectedIndex].LastName;
-                textBox3.Text = studentProfiles.Contact;
-                textBox4.Text = studentProfiles.Email;
-            }
+            this.GetSelectedTopics(topicList2, 1, (int)courseList2.SelectedValue);
         }
 
         private void LoadCustomList()
         {
-            CustomListItem[] customListItem = new CustomListItem[20];
+            this.students = BaseController.GetStudents();
 
-            for (int i = 0; i < 20; i++)
+            var count = this.students.Count();
+
+            CustomListItem[] customListItem = new CustomListItem[count];
+
+            userList.Controls.Clear();
+            for (int i = 0; i < count - 1; i++)
             {
                 customListItem[i] = new CustomListItem();
-                customListItem[i].Title = $"Hello{i.ToString()}";
+                customListItem[i].Title = this.students[i].FirstName + " " + this.students[i].LastName;
                 customListItem[i].MouseDown += new MouseEventHandler(this.CustomItem_Click);
-                flowLayoutPanel1.Controls.Add(customListItem[i]);
+                customListItem[i].Controls[0].MouseDown += new MouseEventHandler(this.CustomLabel_Click);
+                customListItem[i].Tag = i;
+                customListItem[i].Width = userList.Width - 6;
+                customListItem[i].Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)))));
+                userList.Controls.Add(customListItem[i]);
+               // listBox1.Controls.Add(customListItem[i]);
+            }
+
+
+        }
+        private void SetStudentDetails(int sId)
+        {
+            var studentProfiles = BaseController.GetStudentProfileById(sId.ToString());
+            textBox1.Text = this.students[sId - 1].FirstName;
+            textBox2.Text = this.students[sId - 1].LastName;
+            textBox3.Text = studentProfiles.Contact;
+            textBox4.Text = studentProfiles.Email;
+        }
+        private void CustomItem_Click(object sender, MouseEventArgs e)
+        {
+            int sId = (int)((CustomListItem)sender).Tag + 1;
+            this.SetStudentDetails(sId);
+        }
+        private void CustomLabel_Click(object sender, MouseEventArgs e)
+        {
+            int sId = (int)((Label)sender).Parent.Tag + 1;
+            this.SetStudentDetails(sId);
+        }
+
+        private void EnrollButton_Click(object sender, EventArgs e)
+        {
+            var sId = courseList.SelectedValue.ToString();
+            var message = BaseController.InsertProgress(sId);
+            mainStatus.Text = message;
+        }
+
+        private void LearnButton_Click(object sender, EventArgs e)
+        {
+            var selectedId = topicList2.SelectedIndex;
+            var cId = this.topics[selectedId].CourseId;
+            var message = "";
+            int index = this.progresses.FindIndex(c => c.CourseId == cId);
+            if (index != -1)
+            {
+                var tId = this.progresses[index].TopicId;
+                message = BaseController.UpdateProgress(this.topics[selectedId].Id, tId, index);
+            }
+            mainStatus.Text = message;
+            GetProgress(0, progressGrid);
+        }
+
+
+        private void GetProgress(int u, DataGridView grid)
+        {
+            this.progresses = BaseController.GetProgress(0);
+            grid.DataSource = this.progresses;
+            grid.Columns["CourseId"].Visible = false;
+            grid.Columns["TopicId"].Visible = false;
+            grid.Columns["StudentId"].Visible = false;
+            grid.Columns["Id"].Visible = false;
+            if (u == 0)
+            {
+                grid.Columns["Name"].Visible = false;
             }
         }
 
-        private void CustomItem_Click(object sender, MouseEventArgs e)
+        private void GetCourses(ListBox list, int u)
         {
-            MessageBox.Show("Hello");
+            if (this.courses.Count != 0)
+            {
+                list.DataSource = this.courses;
+                list.DisplayMember = "Name";
+                list.ValueMember = "Id";
+                list.SetSelected(0, true);
+            }
+            if (u == 0)
+            {
+                this.GetSelectedTopics(topicList, 0, (int)courseList.SelectedValue);
+            }
+            else
+            {
+                this.GetSelectedTopics(topicList2, 1, (int)courseList2.SelectedValue);
+            }
         }
+
+        private void pageTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (pageTab.SelectedIndex)
+            {
+                case 0:
+                    GetCourses(courseList, 0);
+                    break;
+                case 1:
+                    GetProgress(0, progressGrid);
+                    GetCourses(courseList2, 1);
+                    break;
+                case 2:
+                    LoadCustomList();
+                    GetProgress(1, userProgress);
+                    break;
+            }
+        }
+
+
     }
 }
 

@@ -46,9 +46,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.label1);
             this.Name = "CustomListItem";
-            this.Size = new System.Drawing.Size(328, 63);
+            this.Size = new System.Drawing.Size(263, 63);
             this.MouseEnter += new System.EventHandler(this.CustomListItem_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.CustomListItem_MouseLeave);
             this.ResumeLayout(false);
