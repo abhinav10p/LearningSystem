@@ -14,9 +14,7 @@ namespace LearningSystem.Model
             {
                 optionsBuilder
                     .UseLoggerFactory(MyLoggerFactory)
-                    .EnableSensitiveDataLogging()
-                    .UseLazyLoadingProxies()
-                    .UseSqlServer("server=.;database=N2Learning;user=sa;password=Test@123;");
+                    .EnableSensitiveDataLogging().UseLazyLoadingProxies().UseSqlServer("server=.;database=N2Learning;user=sa;password=Test@123;");
             }
         }
 

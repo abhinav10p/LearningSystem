@@ -10,9 +10,13 @@ namespace LearningSystem
     {
         private List<TextBoxBase> txtBoxes;
         private int UserType = 0;
+
+        BaseController baseController;
         public Login()
         {
             InitializeComponent();
+
+            baseController = new BaseController();
 
             txtBoxes = new List<TextBoxBase>(){
                userBox,
@@ -20,12 +24,12 @@ namespace LearningSystem
             };
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private void loginButton_Click(object sender, EventArgs e)//Login Click
         {
             this.Login_Action();
         }
 
-        private void User_Checked(object sender, EventArgs e)
+        private void User_Checked(object sender, EventArgs e)//User Type
         {
             var userType = (RadioButton)sender;
 
@@ -39,10 +43,9 @@ namespace LearningSystem
                     break;
 
             }
-
         }
 
-        private void Login_Action()
+        private void Login_Action()//Login Action
         {
             var checkValid = true;
 
@@ -70,16 +73,15 @@ namespace LearningSystem
 
             if (checkValid)
             {
-
-                var ins = BaseController.GetStudentProfileByEmail(txtBoxes[0].Text);
+                var ins = baseController.GetStudentProfileByEmail(txtBoxes[0].Text);
 
                 if (ins != null)
                 {
                     if (ins.Password == txtBoxes[1].Text)
                     {
-                        BaseController.NavTo("MainBoard");
- 
-                        BaseController.SetUserId(ins.StudentId);
+                        baseController.NavTo("MainBoard");
+
+                        baseController.SetUserId(ins.StudentId);
 
                         statusLabel.Text = $"Welcome your are logged in successfully";
                     }
@@ -92,13 +94,12 @@ namespace LearningSystem
                 else
                 {
                     statusLabel.Text = "User doesnot exists";
-                    txtBoxes[0].Text = "";
-                    txtBoxes[1].Text = "";
+                    txtBoxes[0].Text = txtBoxes[1].Text = "";
                 }
             }
         }
 
-        private void ResetAll_Click(object sender, EventArgs e)
+        private void ResetAll_Click(object sender, EventArgs e)//Reset Fields
         {
             foreach (var item in txtBoxes)
             {
@@ -107,28 +108,27 @@ namespace LearningSystem
             statusLabel.Text = "";
         }
 
-        private void registerLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void registerLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)//Register
         {
-            BaseController.NavTo("Register");
+            baseController.NavTo("Register");
         }
 
-        private void passBox_KeyDown(object sender, KeyEventArgs e)
+        private void passBox_KeyDown(object sender, KeyEventArgs e)//Pass Action
         {
             if (e.KeyCode == Keys.Enter)
             {
                 this.Login_Action();
             }
-            
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)//Exit
         {
             Application.Exit();
         }
 
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)//Demo
         {
-            BaseController.NavTo("MainBoard");
+            baseController.NavTo("MainBoard");
         }
     }
 }

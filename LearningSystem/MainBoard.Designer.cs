@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pageTab = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.customTopicList = new System.Windows.Forms.FlowLayoutPanel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.topicList = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.comboCategories = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.courseList = new System.Windows.Forms.ListBox();
             this.enrollButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -43,7 +50,6 @@
             this.detailTxt = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.authorTxt = new System.Windows.Forms.Label();
-            this.topicList = new System.Windows.Forms.ListBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.mainStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -52,6 +58,7 @@
             this.courseList2 = new System.Windows.Forms.ListBox();
             this.progressGrid = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.userProgress = new System.Windows.Forms.DataGridView();
             this.listPanel1 = new System.Windows.Forms.Panel();
             this.userList = new System.Windows.Forms.FlowLayoutPanel();
@@ -69,14 +76,11 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label9 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.comboCategories = new System.Windows.Forms.ComboBox();
+            this.courseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pageTab.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -89,7 +93,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.courseGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.courseBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // pageTab
@@ -121,6 +125,7 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.panel5);
+            this.panel3.Controls.Add(this.topicList);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.enrollButton);
             this.panel3.Controls.Add(this.panel2);
@@ -130,6 +135,50 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1048, 663);
             this.panel3.TabIndex = 1;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.customTopicList);
+            this.panel5.Controls.Add(this.label11);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel5.Location = new System.Drawing.Point(733, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(315, 641);
+            this.panel5.TabIndex = 22;
+            // 
+            // customTopicList
+            // 
+            this.customTopicList.AutoScroll = true;
+            this.customTopicList.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.customTopicList.Location = new System.Drawing.Point(3, 37);
+            this.customTopicList.Name = "customTopicList";
+            this.customTopicList.Size = new System.Drawing.Size(312, 604);
+            this.customTopicList.TabIndex = 4;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(3, 13);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(59, 18);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Topics";
+            // 
+            // topicList
+            // 
+            this.topicList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.topicList.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.topicList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.topicList.FormattingEnabled = true;
+            this.topicList.ItemHeight = 20;
+            this.topicList.Location = new System.Drawing.Point(347, 17);
+            this.topicList.Name = "topicList";
+            this.topicList.Size = new System.Drawing.Size(348, 604);
+            this.topicList.TabIndex = 7;
+            this.topicList.Visible = false;
             // 
             // panel4
             // 
@@ -142,12 +191,35 @@
             this.panel4.Size = new System.Drawing.Size(315, 641);
             this.panel4.TabIndex = 21;
             // 
+            // comboCategories
+            // 
+            this.comboCategories.DisplayMember = "Category";
+            this.comboCategories.FormattingEnabled = true;
+            this.comboCategories.Location = new System.Drawing.Point(93, 17);
+            this.comboCategories.Name = "comboCategories";
+            this.comboCategories.Size = new System.Drawing.Size(219, 21);
+            this.comboCategories.TabIndex = 3;
+            this.comboCategories.Text = "Categories";
+            this.comboCategories.ValueMember = "CourseId";
+            this.comboCategories.SelectedIndexChanged += new System.EventHandler(this.comboCategories_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(5, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 18);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Courses";
+            // 
             // courseList
             // 
             this.courseList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.courseList.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.courseList.DisplayMember = "Name";
             this.courseList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.courseList.FormattingEnabled = true;
             this.courseList.ItemHeight = 20;
@@ -155,6 +227,7 @@
             this.courseList.Name = "courseList";
             this.courseList.Size = new System.Drawing.Size(312, 604);
             this.courseList.TabIndex = 1;
+            this.courseList.ValueMember = "Id";
             this.courseList.Click += new System.EventHandler(this.CourseListItem_Click);
             // 
             // enrollButton
@@ -256,20 +329,6 @@
             this.authorTxt.TabIndex = 16;
             this.authorTxt.Text = "Author";
             // 
-            // topicList
-            // 
-            this.topicList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.topicList.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.topicList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.topicList.FormattingEnabled = true;
-            this.topicList.ItemHeight = 20;
-            this.topicList.Location = new System.Drawing.Point(3, 34);
-            this.topicList.Name = "topicList";
-            this.topicList.Size = new System.Drawing.Size(348, 604);
-            this.topicList.TabIndex = 7;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -301,7 +360,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(578, 8);
+            this.button2.Location = new System.Drawing.Point(368, 150);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(315, 28);
             this.button2.TabIndex = 6;
@@ -312,25 +371,29 @@
             // topicList2
             // 
             this.topicList2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.topicList2.DisplayMember = "Name";
             this.topicList2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.topicList2.FormattingEnabled = true;
             this.topicList2.ItemHeight = 20;
-            this.topicList2.Location = new System.Drawing.Point(578, 42);
+            this.topicList2.Location = new System.Drawing.Point(739, 3);
             this.topicList2.Name = "topicList2";
             this.topicList2.Size = new System.Drawing.Size(315, 324);
             this.topicList2.TabIndex = 3;
+            this.topicList2.ValueMember = "Id";
             // 
             // courseList2
             // 
             this.courseList2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.courseList2.DisplayMember = "Course";
             this.courseList2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.courseList2.FormattingEnabled = true;
             this.courseList2.ItemHeight = 20;
-            this.courseList2.Location = new System.Drawing.Point(121, 42);
+            this.courseList2.Location = new System.Drawing.Point(3, 3);
             this.courseList2.Name = "courseList2";
             this.courseList2.Size = new System.Drawing.Size(307, 324);
             this.courseList2.TabIndex = 2;
-            this.courseList2.Click += new System.EventHandler(this.courseList2_Click);
+            this.courseList2.ValueMember = "CourseId";
+            this.courseList2.Click += new System.EventHandler(this.CourseList2_Click);
             // 
             // progressGrid
             // 
@@ -338,9 +401,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.progressGrid.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.progressGrid.Location = new System.Drawing.Point(121, 385);
+            this.progressGrid.Location = new System.Drawing.Point(57, 385);
             this.progressGrid.Name = "progressGrid";
-            this.progressGrid.Size = new System.Drawing.Size(772, 281);
+            this.progressGrid.Size = new System.Drawing.Size(905, 281);
             this.progressGrid.TabIndex = 0;
             // 
             // tabPage1
@@ -356,6 +419,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Users";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(297, 288);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(132, 18);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Users & Progress";
             // 
             // userProgress
             // 
@@ -536,54 +609,9 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
             // 
-            // label9
+            // courseBindingSource
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(297, 288);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(132, 18);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "Users & Progress";
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.label11);
-            this.panel5.Controls.Add(this.topicList);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(733, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(315, 641);
-            this.panel5.TabIndex = 22;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(5, 16);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 18);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Courses";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(3, 13);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 18);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Topics";
-            // 
-            // comboCategories
-            // 
-            this.comboCategories.FormattingEnabled = true;
-            this.comboCategories.Location = new System.Drawing.Point(93, 17);
-            this.comboCategories.Name = "comboCategories";
-            this.comboCategories.Size = new System.Drawing.Size(219, 21);
-            this.comboCategories.TabIndex = 3;
-            this.comboCategories.SelectedIndexChanged += new System.EventHandler(this.comboCategories_SelectedIndexChanged);
+            this.courseBindingSource.DataSource = typeof(LearningSystem.Model.DB.Course);
             // 
             // MainBoard
             // 
@@ -601,6 +629,8 @@
             this.tabPage2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -620,8 +650,7 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.courseBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -675,6 +704,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboCategories;
+        private System.Windows.Forms.FlowLayoutPanel customTopicList;
+        private System.Windows.Forms.BindingSource courseBindingSource;
     }
 }
 

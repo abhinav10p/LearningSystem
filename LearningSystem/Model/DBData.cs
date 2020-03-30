@@ -1,14 +1,16 @@
 ﻿using LearningSystem.Model.DB;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LearningSystem.Model
 {
     public class DBData
     {
-        public ELContext context { get; }
+        private ELContext context { get; }
 
         private int userid;
         public int UserId { get { return userid; } set { userid = value; } }
@@ -17,6 +19,7 @@ namespace LearningSystem.Model
         {
             context = new ELContext();
         }
+
 
         private static DBData instance;
 
@@ -32,6 +35,9 @@ namespace LearningSystem.Model
                 return instance;
             }
         }
+
+        #region
+
 
         public void CreateStudentMock()
         {
@@ -59,11 +65,23 @@ namespace LearningSystem.Model
                     Password = "1234"
                 }
             };
+
+            Student student3 = new Student()
+            {
+                FirstName = "Ana",
+                LastName = "Velasquez",
+                StudentProfile = new StudentProfile
+                {
+                    Contact = "87687687",
+                    Email = "ana@email.com",
+                    Password = "1234"
+                }
+            };
             try
             {
                 context.Students.Add(student1);
-
                 context.Students.Add(student2);
+                context.Students.Add(student3);
 
                 context.SaveChanges();
 
@@ -80,7 +98,7 @@ namespace LearningSystem.Model
         {
             context.Categories.Add(new Category() { Name = "IT" });
 
-            context.Categories.Add(new Category() { Name = "Management" });
+            context.Categories.Add(new Category() { Name = "Project Management" });
 
             context.SaveChanges();
 
@@ -118,10 +136,20 @@ namespace LearningSystem.Model
                     },
                     Topics = new List<Topic>()
                     {
-                           new Topic{Name="Topic Foundation 1"},
-                           new Topic{Name="Topic Foundation 2"},
-                           new Topic{Name="Topic Foundation 3"},
-                           new Topic{Name="Topic Foundation 4"}
+                           new Topic {Name="Topic Foundation 1"},
+                           new Topic{Name="Important Before You Start"},
+                           new Topic{Name="Programming Languages"},
+                           new Topic{Name="Compilers vs Interpreters"},
+                           new Topic{Name="History About C# Language"},
+                           new Topic{Name="Object-oriented Programming"},
+                           new Topic{Name="Overloaded Methods Exercise"},
+                           new Topic{Name="Abstraction "},
+                           new Topic{Name="Inheritance"},
+                           new Topic{Name="Encapsulation"},
+                           new Topic{Name="Non-generic Hashtable"},
+                           new Topic{Name="Generic List <T>"},
+                           new Topic{Name="NameValueCollection"},
+                           new Topic{Name="Nested Tuples"}
                     }
                 };
                 var kurs2 = new Course()
@@ -152,7 +180,14 @@ namespace LearningSystem.Model
                     {
                            new Topic{Name="Agile Foundation 1"},
                            new Topic{Name="Resource Management"},
-                           new Topic{Name="Scrum Management"}
+                           new Topic{Name="Queries, Charts and Dashboards"},
+                           new Topic{Name="Task boards and other features."},
+                           new Topic{Name="Capacity Planning, Notifications"},
+                           new Topic{Name="Create custom process"},
+                           new Topic{Name="Review and PDF of Lecture"},
+                           new Topic{Name="Scrum Management"},
+                           new Topic{Name="work items"},
+                           new Topic{Name="Integration with Excel"}
                     }
                 };
                 context.Attach(kurs1);
@@ -177,12 +212,6 @@ namespace LearningSystem.Model
                 Console.WriteLine($"Entity: {entry.Entity.GetType().Name}, State: {entry.State.ToString()}");
             }
         }
-
-        public void SetUserId()
-        {
-
-        }
-
-       
+        #endregion
     }
 }

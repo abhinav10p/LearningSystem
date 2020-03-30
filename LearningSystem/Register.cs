@@ -15,12 +15,19 @@ namespace LearningSystem
 {
     public partial class Register : Form
     {
-        private List<TextBoxBase> txtBoxes;
+        private  List<TextBoxBase> txtBoxes;
 
+
+        BaseController baseController;
+
+       
         private bool checkValid;
+
         public Register()
         {
             InitializeComponent();
+
+            baseController = new BaseController();
 
             txtBoxes = new List<TextBoxBase>(){
                 firstNameBox,
@@ -32,20 +39,21 @@ namespace LearningSystem
             };
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)//Exit
         {
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//NacToLogin
         {
-            BaseController.NavTo("Login");
+            baseController.NavTo("Login");
         }
 
         private void sumitButton_Click(object sender, EventArgs e)
         {
             this.Submit_Data();
         }
+
         private void Submit_Data()
         {
             checkValid = true;
@@ -54,15 +62,15 @@ namespace LearningSystem
 
             if (checkValid)
             {
-                var ins = BaseController.GetStudentProfileByEmail(txtBoxes[1].Text);
+                var ins = baseController.GetStudentProfileByEmail(txtBoxes[1].Text);
 
 
                 if (ins == null)
                 {
-                    BaseController.InsertStudent(txtBoxes[0].Text, txtBoxes[5].Text,
+                    baseController.InsertStudent(txtBoxes[0].Text, txtBoxes[5].Text,
                         txtBoxes[4].Text, txtBoxes[1].Text, txtBoxes[2].Text);
 
-                    BaseController.NavTo("Login");
+                    baseController.NavTo("Login");
                 }
                 else
                 {
@@ -70,6 +78,7 @@ namespace LearningSystem
                 }
             }
         }
+
         private void CheckValidity(bool checkValid)
         {
             for (int i = 0; i < txtBoxes.Count; i++)
