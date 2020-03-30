@@ -10,7 +10,7 @@ namespace LearningSystem.Model
 {
     public class DBData
     {
-        private ELContext context { get; }
+        public ELContext context { get; }
 
         private int userid;
         public int UserId { get { return userid; } set { userid = value; } }

@@ -11,7 +11,7 @@ namespace LearningSystem.Controller
 {
     public class BaseController
     {
-        DBData db;
+        public DBData db { get;  }
         public BaseController()
         {
             db = DBData.Instance;
@@ -20,30 +20,22 @@ namespace LearningSystem.Controller
 
 
         //Student
-        public List<Student> GetStudents()
+        public List<Student> GetStudents()//Student List
         {
             return db.context.Students.ToList();
         }
 
-        public StudentProfile GetStudentProfileById(string sId)
+        public StudentProfile GetStudentProfileById(string sId)//Student By Id
         {
-            
             return db.context.StudentProfiles.ToList().SingleOrDefault(p => p.StudentId == int.Parse(sId));
         }
 
-        public StudentProfile GetStudentProfileByEmail(string sId)
-        {
-            
+        public StudentProfile GetStudentProfileByEmail(string sId)//Student By Email
+        {   
             return db.context.StudentProfiles.ToList().SingleOrDefault(p => p.Email == sId);
         }
 
-        public void CreateStudentMock()
-        {
-            
-            db.CreateStudentMock();
-        }
-
-        public void InsertStudent(string p1, string p2, string p3, string p4, string p5)
+        public void InsertStudent(string p1, string p2, string p3, string p4, string p5)//Register Student
         {
             Student student = new Student()
             {
@@ -64,28 +56,22 @@ namespace LearningSystem.Controller
         }
 
 
-        //Topics & Course
-        public List<Topic> GetTopics(string sId)
-        {
-            
+       
+
+        public List<Topic> GetTopics(string sId)//Topic List
+        {  
             return db.context.Topics
                 .ToList().Where(p => p.CourseId == int.Parse(sId)).ToList();
         }
 
-        public void CreateCourseMock()
-        {            
-            db.CreateCourseMock();
-        }
-
-
-        public List<Course> GetCourses()
+        public List<Course> GetCourses()//Course List
         {
             return db.context.Courses
                 .Include(c => c.Topics)
                 .ToList();
         }
 
-        public List<Model.API.CourseCategory> GetCategories()
+        public List<Model.API.CourseCategory> GetCategories()//Category List
         {
             
             var cs = db.context.Courses;
@@ -109,13 +95,7 @@ namespace LearningSystem.Controller
             return oList;
         }
 
-        public void CreateCategory()
-        {
-            
-            db.CreateCategory();
-        }
-
-
+        
 
 
         //Progress Methods
@@ -244,7 +224,7 @@ namespace LearningSystem.Controller
             return db.UserId;
         }
 
-
+      
 
         public void NavTo(string windowName)
         {
@@ -286,6 +266,25 @@ namespace LearningSystem.Controller
                     new Mock().Show();
                     break;
             }
+        }
+
+
+
+        /// <summary>
+        /// Mock Mehods
+        /// </summary>
+        public void CreateStudentMock()
+        {
+
+            db.CreateStudentMock();
+        }
+        public void CreateCategory()
+        {
+            db.CreateCategory();
+        }
+        public void CreateCourseMock()
+        {
+            db.CreateCourseMock();
         }
 
     }
