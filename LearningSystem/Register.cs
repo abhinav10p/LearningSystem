@@ -16,10 +16,12 @@ namespace LearningSystem
     public partial class Register : Form
     {
         private List<TextBoxBase> txtBoxes;
+
         private bool checkValid;
         public Register()
         {
             InitializeComponent();
+
             txtBoxes = new List<TextBoxBase>(){
                 firstNameBox,
                 emailBox,
@@ -59,6 +61,7 @@ namespace LearningSystem
                 {
                     BaseController.InsertStudent(txtBoxes[0].Text, txtBoxes[5].Text,
                         txtBoxes[4].Text, txtBoxes[1].Text, txtBoxes[2].Text);
+
                     BaseController.NavTo("Login");
                 }
                 else
@@ -74,7 +77,9 @@ namespace LearningSystem
                 if (string.IsNullOrEmpty(txtBoxes[i].Text) && i < 4)
                 {
                     checkValid = false;
+
                     errorProvider1.SetError(txtBoxes[i], "Please fill in the fields");
+
                     if (i == 2 || i == 3)
                     {
                         if (txtBoxes[2].Text != txtBoxes[3].Text)

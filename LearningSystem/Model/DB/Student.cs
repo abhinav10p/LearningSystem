@@ -17,6 +17,7 @@ namespace LearningSystem.Model.DB
 
         [MaxLength(50)]
         public string LastName { get; set; }
+
         public virtual StudentProfile StudentProfile { get; set; }
 
         public virtual ICollection<Progress> Progresses { get; set; }

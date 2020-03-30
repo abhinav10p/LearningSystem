@@ -21,8 +21,6 @@ namespace LearningSystem.Model.DB
 
         public int Lectures { get; set; }
 
-        //public DateTime LastUpdated { get; set; }
-
         public int TeacherId { get; set; }
 
         public virtual Teacher Teacher { get; set; }

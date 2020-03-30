@@ -73,6 +73,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.comboCategories = new System.Windows.Forms.ComboBox();
             this.pageTab.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -132,6 +133,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.comboCategories);
             this.panel4.Controls.Add(this.label10);
             this.panel4.Controls.Add(this.courseList);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
@@ -574,6 +576,15 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "Topics";
             // 
+            // comboCategories
+            // 
+            this.comboCategories.FormattingEnabled = true;
+            this.comboCategories.Location = new System.Drawing.Point(93, 17);
+            this.comboCategories.Name = "comboCategories";
+            this.comboCategories.Size = new System.Drawing.Size(219, 21);
+            this.comboCategories.TabIndex = 3;
+            this.comboCategories.SelectedIndexChanged += new System.EventHandler(this.comboCategories_SelectedIndexChanged);
+            // 
             // MainBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -663,6 +674,7 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox comboCategories;
     }
 }
 

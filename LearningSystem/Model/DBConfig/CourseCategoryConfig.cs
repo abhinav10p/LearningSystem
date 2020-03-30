@@ -18,10 +18,12 @@ namespace LearningSystem.Model.DBConfig
                   .ToTable("CourseCategory")
                   .HasKey(k => new { k.CourseId, k.CategoryId });
 
+
             modelBuilder
                  .HasOne<Course>(c => c.Course)
                  .WithMany(c => c.CourseCategories)
                  .HasForeignKey(c => c.CourseId);
+
 
             modelBuilder
                .HasOne<Category>(c => c.Category)

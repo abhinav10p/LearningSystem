@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearningSystem.Model.DB
+namespace LearningSystem.Model.API
 {
     public class CourseCategory
     {
         public int CourseId { get; set; }
 
-        public virtual Course Course { get; set; }
+        public string Course { get; set; }
 
         public int CategoryId { get; set; }
 
-        public virtual Category Category { get; set; }
+        public string Category { get; set; }
     }
 }

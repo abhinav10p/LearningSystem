@@ -23,8 +23,11 @@ namespace LearningSystem.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new StudentConfig());
+
             modelBuilder.ApplyConfiguration(new TeacherConfig());
+            
             modelBuilder.ApplyConfiguration(new CourseConfig());
+            
             modelBuilder.ApplyConfiguration(new CourseCategoryConfig());
         }
 
@@ -37,6 +40,9 @@ namespace LearningSystem.Model
         public DbSet<TeacherProfile> TeacherProfiles { get; set; }
         public DbSet<Category> Categories{ get; set; }
         public DbSet<Progress> Progresses { get; set; }
+        public DbSet<CourseCategory> CourseCategories { get; set; }
+
+
        /* public override int SaveChanges()
         {
             //-- Filter the entites, Added/Modified --//

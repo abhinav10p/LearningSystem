@@ -13,6 +13,7 @@ namespace LearningSystem
         public Login()
         {
             InitializeComponent();
+
             txtBoxes = new List<TextBoxBase>(){
                userBox,
                passBox
@@ -27,6 +28,7 @@ namespace LearningSystem
         private void User_Checked(object sender, EventArgs e)
         {
             var userType = (RadioButton)sender;
+
             switch (userType.Tag.ToString())
             {
                 case "1":
@@ -60,7 +62,9 @@ namespace LearningSystem
             if (UserType == 0)
             {
                 radioButton1.Focus();
+
                 statusLabel.Text = "Select User Type";
+
                 return;
             }
 
@@ -74,7 +78,9 @@ namespace LearningSystem
                     if (ins.Password == txtBoxes[1].Text)
                     {
                         BaseController.NavTo("MainBoard");
-                        BaseController.UserId = ins.StudentId;
+ 
+                        BaseController.SetUserId(ins.StudentId);
+
                         statusLabel.Text = $"Welcome your are logged in successfully";
                     }
                     else

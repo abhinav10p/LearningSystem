@@ -9,7 +9,6 @@ namespace LearningSystem.Model.DB
 {
     public class Topic: BaseModel
     {
-       // public int Id { get; set; }
 
         [MaxLength(50)]
         public string Name { get; set; }

@@ -11,9 +11,7 @@ namespace LearningSystem.Controller
 {
     public class BaseController
     {
-        private static int userid;
-
-        public static int UserId { get { return userid; } set { userid = value; } }
+      
 
         public BaseController()
         {
@@ -48,9 +46,34 @@ namespace LearningSystem.Controller
         public static List<Course> GetCourses()
         {
             DBData db = DBData.Instance;
+
             return db.context.Courses
                 .Include(c => c.Topics)
                 .ToList();
+        }
+
+        public static List<Model.API.CourseCategory> GetCategories()
+        {
+            DBData db = DBData.Instance;
+            var cs = db.context.Courses;
+            var cts = db.context.Categories;
+            var cct = db.context.CourseCategories;
+
+            var cats = from c in cs
+                     join cc in cct on c.Id equals cc.CourseId
+                     join ct in cts on cc.CategoryId equals ct.Id
+                     select new Model.API.CourseCategory
+                     {
+                         Course = c.Name,
+                         Category = ct.Name,
+                         CategoryId = ct.Id,
+                         CourseId =  c.Id
+                     };
+
+            var oList = cats.ToList();
+            oList.Insert(0, new Model.API.CourseCategory() { Course="All", Category="All", CategoryId=-1, CourseId=-1});
+            
+            return oList;
         }
 
         public static void CreateStudentMock()
@@ -159,10 +182,11 @@ namespace LearningSystem.Controller
 
             var allProgress = db.context.Progresses.ToList();
             var progress = allProgress;
+
             if (u == 0)
             {
                 progress = allProgress
-              .Where(p => p.StudentId == UserId).ToList();
+              .Where(p => p.StudentId == GetUser()).ToList();
             }
 
 
@@ -194,7 +218,7 @@ namespace LearningSystem.Controller
         public static string InsertProgress(string courseId)
         {
             DBData db = DBData.Instance;
-            var sId = UserId;
+            var sId = GetUser();//  UserId;
             var tId = GetTopics(courseId).First().Id;
             String message;
 
@@ -222,7 +246,7 @@ namespace LearningSystem.Controller
         public static string UpdateProgress(int tId, int oldtId, int index)
         {
             DBData db = DBData.Instance;
-            var sId = UserId;
+            var sId = GetUser(); // UserId;
             String message;
             var result1 = db.context.Progresses;
             var result = result1.SingleOrDefault(b => b.StudentId == sId && b.TopicId == oldtId);
@@ -238,7 +262,21 @@ namespace LearningSystem.Controller
             {
                 message = "Failed to start";
             }
+
             return message;
+        }
+
+
+        public static void SetUserId(int sUser)
+        {
+            DBData db = DBData.Instance;
+            db.UserId = sUser;
+        }
+
+        public static int GetUser()
+        {
+            DBData db = DBData.Instance;
+            return db.UserId;
         }
 
     }

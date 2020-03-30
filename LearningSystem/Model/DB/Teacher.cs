@@ -9,7 +9,6 @@ namespace LearningSystem.Model.DB
 {
     public class Teacher: BaseModel
     {
-       // public int Id { get; set; }
 
         [MaxLength(50)]
         public string Degree { get; set; }
