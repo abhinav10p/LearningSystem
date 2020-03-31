@@ -1,5 +1,4 @@
 ﻿using LearningSystem.Model;
-using LearningSystem.Model.API;
 using LearningSystem.Model.DB;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +10,7 @@ namespace LearningSystem.Controller
 {
     public class BaseController
     {
-        public DBData db { get;  }
+        public DBData db { get; }
         public BaseController()
         {
             db = DBData.Instance;
@@ -25,14 +24,33 @@ namespace LearningSystem.Controller
             return db.context.Students.ToList();
         }
 
-        public StudentProfile GetStudentProfileById(string sId)//Student By Id
+        public Model.DTO.StudentProfile GetStudentProfileById(string sId)//Student By Id
         {
-            return db.context.StudentProfiles.ToList().SingleOrDefault(p => p.StudentId == int.Parse(sId));
+            var dto = db.context.StudentProfiles
+            .Select(p => new Model.DTO.StudentProfile
+            {
+                Email = p.Email,
+                StudentId = p.StudentId,
+                Contact = p.Contact,
+                Name = $"{p.Student.FirstName} {p.Student.LastName}"
+            })
+            .SingleOrDefault(p => p.StudentId == int.Parse(sId));
+            return dto;
         }
 
-        public StudentProfile GetStudentProfileByEmail(string sId)//Student By Email
-        {   
-            return db.context.StudentProfiles.ToList().SingleOrDefault(p => p.Email == sId);
+        public Model.DTO.StudentProfile GetStudentProfileByEmail(string sId, string pass)//Student By Email
+        {
+            var dto = db.context.StudentProfiles
+           .Select(p => new Model.DTO.StudentProfile
+           {
+               Email = p.Email,
+               StudentId = p.StudentId,
+               Contact = p.Contact,
+               Name = $"{p.Student.FirstName} {p.Student.LastName}",
+               Password = (p.Password == pass)
+           }).ToList()
+           .SingleOrDefault(p => p.Email == sId);
+            return dto;
         }
 
         public void InsertStudent(string p1, string p2, string p3, string p4, string p5)//Register Student
@@ -41,14 +59,14 @@ namespace LearningSystem.Controller
             {
                 FirstName = p1,
                 LastName = p2,
-                StudentProfile = new StudentProfile
+                StudentProfile = new Model.DB.StudentProfile
                 {
                     Contact = p3,
                     Email = p4,
                     Password = p5
                 }
             };
-            
+
 
             db.context.Students.Add(student);
 
@@ -56,12 +74,13 @@ namespace LearningSystem.Controller
         }
 
 
-       
+
 
         public List<Topic> GetTopics(string sId)//Topic List
-        {  
+        {
             return db.context.Topics
-                .ToList().Where(p => p.CourseId == int.Parse(sId)).ToList();
+                .ToList()
+                .Where(p => p.CourseId == int.Parse(sId)).ToList();
         }
 
         public List<Course> GetCourses()//Course List
@@ -71,9 +90,9 @@ namespace LearningSystem.Controller
                 .ToList();
         }
 
-        public List<Model.API.CourseCategory> GetCategories()//Category List
+        public List<Model.DTO.CourseCategory> GetCategories()//Category List
         {
-            
+
             var cs = db.context.Courses;
             var cts = db.context.Categories;
             var cct = db.context.CourseCategories;
@@ -81,7 +100,7 @@ namespace LearningSystem.Controller
             var cats = from c in cs
                        join cc in cct on c.Id equals cc.CourseId
                        join ct in cts on cc.CategoryId equals ct.Id
-                       select new Model.API.CourseCategory
+                       select new Model.DTO.CourseCategory
                        {
                            Course = c.Name,
                            Category = ct.Name,
@@ -90,12 +109,12 @@ namespace LearningSystem.Controller
                        };
 
             var oList = cats.ToList();
-            oList.Insert(0, new Model.API.CourseCategory() { Course = "All", Category = "All", CategoryId = -1, CourseId = -1 });
+            oList.Insert(0, new Model.DTO.CourseCategory() { Course = "All", Category = "All", CategoryId = -1, CourseId = -1 });
 
             return oList;
         }
 
-        
+
 
 
         //Progress Methods
@@ -116,9 +135,9 @@ namespace LearningSystem.Controller
 
         }
 
-        public List<FullProgress> GetProgress(int u)
+        public List<Model.DTO.Progress> GetProgress(int u)
         {
-            
+
             var st = db.context.Students;
             var tp = db.context.Topics;
             var cs = db.context.Courses;
@@ -137,7 +156,7 @@ namespace LearningSystem.Controller
                      join s in st on p.StudentId equals s.Id
                      join t in tp on p.TopicId equals t.Id
                      join c in cs on t.CourseId equals c.Id
-                     select new FullProgress
+                     select new Model.DTO.Progress
                      {
                          Name = $"{s.FirstName } {s.LastName}",
                          Course = c.Name,
@@ -153,21 +172,21 @@ namespace LearningSystem.Controller
 
         public bool ProgressExist(int sId, int tId)
         {
-            
+
             var progresses = db.context.Progresses.ToList().SingleOrDefault(p => p.StudentId == sId && p.TopicId == tId);
             return (progresses != null);
         }
 
         public string InsertProgress(string courseId)
         {
-            
+
             var sId = GetUser();//  UserId;
             var tId = GetTopics(courseId).First().Id;
             String message;
 
             if (!ProgressExist(sId, tId))
             {
-                Progress pr = new Progress()
+                Model.DB.Progress pr = new Model.DB.Progress()
                 {
                     StudentId = sId,
                     TopicId = tId,
@@ -188,7 +207,7 @@ namespace LearningSystem.Controller
 
         public string UpdateProgress(int tId, int oldtId, int index)
         {
-            
+
             var sId = GetUser(); // UserId;
             String message;
             var result1 = db.context.Progresses;
@@ -214,17 +233,23 @@ namespace LearningSystem.Controller
 
         public void SetUserId(int sUser)
         {
-            
             db.UserId = sUser;
         }
-
         public int GetUser()
         {
-            
             return db.UserId;
+        }  
+       
+        public string GetUserInfo()
+        {
+            return db.UserInfo;
+        }
+        public void SetUserInfo(string sUser)
+        {
+            db.UserInfo = sUser;
         }
 
-      
+
 
         public void NavTo(string windowName)
         {

@@ -73,6 +73,16 @@ namespace LearningSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap online_learning {
+            get {
+                object obj = ResourceManager.GetObject("online-learning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap vtx {
             get {
                 object obj = ResourceManager.GetObject("vtx", resourceCulture);

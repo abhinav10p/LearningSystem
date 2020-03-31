@@ -14,7 +14,7 @@ namespace LearningSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainBoard());
+            Application.Run(new Login());
 
             /*if (BaseController.GetStudents().Count == 0)
             {

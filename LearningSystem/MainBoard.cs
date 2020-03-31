@@ -1,6 +1,6 @@
 ﻿using LearningSystem.Controller;
 using LearningSystem.Model;
-using LearningSystem.Model.API;
+using LearningSystem.Model.DTO;
 using LearningSystem.Model.DB;
 using LearningSystem.UXCustom;
 using System;
@@ -18,7 +18,7 @@ namespace LearningSystem
         List<Student> students;
         List<Course> courses;
         List<Topic> topics;
-        List<FullProgress> progresses;
+        List<Model.DTO.Progress> progresses;
 
         public MainBoard()
         {
@@ -28,7 +28,7 @@ namespace LearningSystem
             students = new List<Student>();
             courses = new List<Course>();
             topics = new List<Topic>();
-            progresses = new List<FullProgress>();
+            progresses = new List<Model.DTO.Progress>();
 
             Oninit();
         }
@@ -44,6 +44,8 @@ namespace LearningSystem
             GetCourses(0);
 
             comboCategories.DataSource = baseController.GetCategories();
+
+            toolStripStatusLabel1.Text = $"Hello {baseController.GetUserInfo()}";
         }
 
 
@@ -58,7 +60,7 @@ namespace LearningSystem
             grid.Columns["CourseId"].Visible = false;
             grid.Columns["TopicId"].Visible = false;
             grid.Columns["StudentId"].Visible = false;
-            grid.Columns["Id"].Visible = false;
+            //grid.Columns["Id"].Visible = false;
             grid.Columns["Name"].Visible = (u != 0);
         }
 
@@ -166,7 +168,7 @@ namespace LearningSystem
             var sId = courseList.SelectedValue.ToString();
             var message = baseController.InsertProgress(sId);
 
-            mainStatus.Text = message;
+            toolStripStatusLabel1.Text = message;
         }
 
         private void LearnButton_Click(object sender, EventArgs e)  //Learn
@@ -182,7 +184,7 @@ namespace LearningSystem
                 message = baseController.UpdateProgress(topics[selectedId].Id, tId, index);
             }
 
-            mainStatus.Text = message;
+            toolStripStatusLabel1.Text = message;
 
             GetProgress(0, progressGrid);
         }

@@ -73,22 +73,28 @@ namespace LearningSystem
 
             if (checkValid)
             {
-                var ins = baseController.GetStudentProfileByEmail(txtBoxes[0].Text);
+                if (txtBoxes[1].Text == null || txtBoxes[1].Text == "")
+                {
+                    errorProvider1.SetError(txtBoxes[1], "Please check your password");
+                    statusLabel.Text = "Please check your password";
+                    return;
+                }
+                var ins = baseController.GetStudentProfileByEmail(txtBoxes[0].Text, txtBoxes[1].Text);
 
                 if (ins != null)
                 {
-                    if (ins.Password == txtBoxes[1].Text)
+                    if (ins.Password)
                     {
-                        baseController.NavTo("MainBoard");
-
                         baseController.SetUserId(ins.StudentId);
+                        baseController.SetUserInfo(ins.Name);
+                        baseController.NavTo("MainBoard");                   
 
                         statusLabel.Text = $"Welcome your are logged in successfully";
                     }
                     else
                     {
-                        errorProvider1.SetError(txtBoxes[1], "Please check your password");
-                        statusLabel.Text = "Please check your password";
+                        statusLabel.Text = "Check you credentials";
+                        txtBoxes[0].Text = txtBoxes[1].Text = "";
                     }
                 }
                 else

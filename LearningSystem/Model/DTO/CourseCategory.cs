@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearningSystem.Model.API
+namespace LearningSystem.Model.DTO
 {
     public class CourseCategory
     {

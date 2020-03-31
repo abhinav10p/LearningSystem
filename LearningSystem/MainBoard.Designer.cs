@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainBoard));
             this.pageTab = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -76,6 +77,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.courseBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pageTab.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -107,7 +109,7 @@
             this.pageTab.Location = new System.Drawing.Point(0, 31);
             this.pageTab.Name = "pageTab";
             this.pageTab.SelectedIndex = 0;
-            this.pageTab.Size = new System.Drawing.Size(1062, 695);
+            this.pageTab.Size = new System.Drawing.Size(1062, 671);
             this.pageTab.TabIndex = 0;
             this.pageTab.SelectedIndexChanged += new System.EventHandler(this.pageTab_SelectedIndexChanged);
             // 
@@ -117,7 +119,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1054, 669);
+            this.tabPage2.Size = new System.Drawing.Size(1054, 645);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Courses";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -129,11 +131,10 @@
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.enrollButton);
             this.panel3.Controls.Add(this.panel2);
-            this.panel3.Controls.Add(this.statusStrip1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1048, 663);
+            this.panel3.Size = new System.Drawing.Size(1048, 639);
             this.panel3.TabIndex = 1;
             // 
             // panel5
@@ -143,11 +144,13 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel5.Location = new System.Drawing.Point(733, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(315, 641);
+            this.panel5.Size = new System.Drawing.Size(315, 639);
             this.panel5.TabIndex = 22;
             // 
             // customTopicList
             // 
+            this.customTopicList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.customTopicList.AutoScroll = true;
             this.customTopicList.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.customTopicList.Location = new System.Drawing.Point(3, 37);
@@ -176,7 +179,7 @@
             this.topicList.ItemHeight = 20;
             this.topicList.Location = new System.Drawing.Point(347, 17);
             this.topicList.Name = "topicList";
-            this.topicList.Size = new System.Drawing.Size(348, 604);
+            this.topicList.Size = new System.Drawing.Size(348, 564);
             this.topicList.TabIndex = 7;
             this.topicList.Visible = false;
             // 
@@ -188,7 +191,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(315, 641);
+            this.panel4.Size = new System.Drawing.Size(315, 639);
             this.panel4.TabIndex = 21;
             // 
             // comboCategories
@@ -252,7 +255,7 @@
             this.panel2.Controls.Add(this.detailTxt);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.authorTxt);
-            this.panel2.Location = new System.Drawing.Point(347, 226);
+            this.panel2.Location = new System.Drawing.Point(347, 214);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(331, 210);
             this.panel2.TabIndex = 20;
@@ -332,10 +335,12 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mainStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 641);
+            this.mainStatus,
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 704);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1048, 22);
+            this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.statusStrip1.Size = new System.Drawing.Size(1062, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -353,7 +358,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1054, 669);
+            this.tabPage3.Size = new System.Drawing.Size(1054, 645);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Progress";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -415,7 +420,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1054, 669);
+            this.tabPage1.Size = new System.Drawing.Size(1054, 645);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Users";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -609,6 +614,12 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.Menu_Click);
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
             // courseBindingSource
             // 
             this.courseBindingSource.DataSource = typeof(LearningSystem.Model.DB.Course);
@@ -621,6 +632,8 @@
             this.ClientSize = new System.Drawing.Size(1062, 726);
             this.Controls.Add(this.pageTab);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainBoard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -628,7 +641,6 @@
             this.pageTab.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -706,6 +718,7 @@
         private System.Windows.Forms.ComboBox comboCategories;
         private System.Windows.Forms.FlowLayoutPanel customTopicList;
         private System.Windows.Forms.BindingSource courseBindingSource;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

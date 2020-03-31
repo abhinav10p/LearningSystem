@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearningSystem.Model.API
+namespace LearningSystem.Model.DTO
 {
-    public class FullProgress : BaseModel
+    public class Progress
     {
         public string Name { get; set; }
 

@@ -198,8 +198,8 @@
     <Compile Include="Mock.Designer.cs">
       <DependentUpon>Mock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\API\CourseCategory.cs" />
-    <Compile Include="Model\API\FullProgress.cs" />
+    <Compile Include="Model\DTO\CourseCategory.cs" />
+    <Compile Include="Model\DTO\Progress.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\DBConfig\CourseCategoryConfig.cs" />
     <Compile Include="Model\DBConfig\CourseConfig.cs" />
@@ -214,6 +214,7 @@
     <Compile Include="Model\DB\Teacher.cs" />
     <Compile Include="Model\DB\TeacherProfile.cs" />
     <Compile Include="Model\DB\Topic.cs" />
+    <Compile Include="Model\DTO\StudentProfile.cs" />
     <Compile Include="Model\ELContext.cs" />
     <Compile Include="Model\DBData.cs" />
     <Compile Include="Program.cs" />
@@ -281,6 +282,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\online-learning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.1.0.19235.1\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.1.0.19235.1\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />

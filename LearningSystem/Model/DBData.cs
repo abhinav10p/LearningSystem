@@ -15,6 +15,9 @@ namespace LearningSystem.Model
         private int userid;
         public int UserId { get { return userid; } set { userid = value; } }
 
+        private string userInfo;
+        public string UserInfo { get { return userInfo; } set { userInfo = value; } }
+
         private DBData()
         {
             context = new ELContext();
