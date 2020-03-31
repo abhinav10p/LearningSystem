@@ -18,7 +18,7 @@ namespace LearningSystem.Controller
 
 
 
-        //Student
+   
         public List<Student> GetStudents()//Student List
         {
             return db.context.Students.ToList();
@@ -117,7 +117,6 @@ namespace LearningSystem.Controller
 
 
 
-        //Progress Methods
         private int GetCompletionPercent(int cId, int tId)
         {
             var topics = GetTopics(cId.ToString());

@@ -13,7 +13,7 @@ namespace LearningSystem.Model.DBConfig
     {
         public void Configure(EntityTypeBuilder<CourseCategory> modelBuilder)
         {
-            ///1-1 Student to Profile
+            ///course Category
             modelBuilder
                   .ToTable("CourseCategory")
                   .HasKey(k => new { k.CourseId, k.CategoryId });

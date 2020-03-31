@@ -32,12 +32,19 @@ namespace LearningSystem.Model
         public DbSet<Student> Students { get; set; }
 
         public DbSet<Teacher> Teachers { get; set; }
+
         public DbSet<Course> Courses { get; set; }
+
         public DbSet<Topic> Topics { get; set; }
+        
         public DbSet<StudentProfile> StudentProfiles { get; set; }
+        
         public DbSet<TeacherProfile> TeacherProfiles { get; set; }
+        
         public DbSet<Category> Categories{ get; set; }
+        
         public DbSet<Progress> Progresses { get; set; }
+        
         public DbSet<CourseCategory> CourseCategories { get; set; }
 
 

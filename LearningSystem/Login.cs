@@ -134,7 +134,8 @@ namespace LearningSystem
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)//Demo
         {
-            baseController.NavTo("MainBoard");
+            //baseController.NavTo("MainBoard");
+            baseController.NavTo("Mock");
         }
     }
 }
